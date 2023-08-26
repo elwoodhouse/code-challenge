@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Table() {
   const users = await prisma.users.findMany({
@@ -13,14 +14,16 @@ export default async function Table() {
       <div className="divide-y divide-gray-900/5">
         {users.map(user => (
           <div key={user.name} className="flex items-center justify-between py-3">
-            <div className="flex items-center space-x-4">
-              <Image src={user.image} alt={user.name} width={48} height={48} className="rounded-full ring-1 ring-gray-900/5" />
-              <div className="space-y-1">
-                <p className="font-medium leading-none">{user.name}</p>
-                <p className="text-sm text-gray-500">{user.email}</p>
+            <Link href={`/${user.id}`} className="flex items-center justify-between w-full">
+              <div className="flex items-center space-x-4">
+                <Image src={user.image} alt={user.name} width={48} height={48} className="rounded-full ring-1 ring-gray-900/5" />
+                <div className="space-y-1">
+                  <p className="font-medium leading-none">{user.name}</p>
+                  <p className="text-sm text-gray-500">{user.email}</p>
+                </div>
               </div>
-            </div>
-            <p className="text-sm text-gray-500">{user.forms.length} forms created.</p>
+              <p className="text-sm text-gray-500">{user.forms.length} forms created.</p>
+            </Link>
           </div>
         ))}
       </div>
