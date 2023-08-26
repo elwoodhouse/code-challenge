@@ -1,12 +1,13 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
+import CreateNewFormButton from "@/components/new-form-button";
 
-export default async function Page(params: { params: { user_id: string } }) {
-  debugger;
+export default async function Page(props: { params: { userId: string } }) {
+  const userId = parseInt(props.params.userId);
   const user = await prisma.users.findUnique({
     where: {
-      id: parseInt(params.params.user_id),
+      id: userId,
     },
     include: {
       forms: true,
@@ -24,10 +25,29 @@ export default async function Page(params: { params: { user_id: string } }) {
       </div>
       <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
         <div className="divide-y divide-gray-900/5">
-          {/* {user?.forms.map(user => (
-            
-          ))} */}
+          <table className="w-full">
+            <thead className="border-b-2 border-gray-900/10">
+              <tr>
+                <th>Form ID</th>
+                <th>Status</th>
+              </tr>
+              {/* <th></th> */}
+            </thead>
+            <tbody>
+              {user &&
+                user.forms.map(form => (
+                  <tr key={form.id}>
+                    <td>{form.id}</td>
+                    <td>{form.status}</td>
+                    {/* <td>resume</td> */}
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
+      </div>
+      <div className="flex items-center space-x-4 max-w-xl mx-auto w-full p-4">
+        <CreateNewFormButton userId={userId} />
       </div>
     </main>
   );
