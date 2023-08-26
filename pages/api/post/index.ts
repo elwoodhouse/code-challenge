@@ -15,7 +15,7 @@ export default async function handle(
       id: true
     }
   });
-  debugger;
-  res.redirect(307, `/${userId}/${result.id}/form1`);
+
+  return res.status(200).json(result)
 }
 

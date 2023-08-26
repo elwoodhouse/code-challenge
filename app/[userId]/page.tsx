@@ -46,7 +46,7 @@ export default async function Page(props: { params: { userId: string } }) {
           </table>
         </div>
       </div>
-      <div className="flex items-center space-x-4 max-w-xl mx-auto w-full p-4">
+      <div className="flex items-center justify-end space-x-4 max-w-xl mx-auto w-full py-4">
         <CreateNewFormButton userId={userId} />
       </div>
     </main>
