@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
-import CreateNewFormButton from "@/components/new-form-button";
+import NewFormButton from "@/components/new-form-button";
 
 export default async function Page(props: { params: { userId: string } }) {
   const userId = parseInt(props.params.userId);
@@ -45,9 +45,9 @@ export default async function Page(props: { params: { userId: string } }) {
             </tbody>
           </table>
         </div>
-      </div>
-      <div className="flex items-center justify-end space-x-4 max-w-xl mx-auto w-full py-4">
-        <CreateNewFormButton userId={userId} />
+        <div className="flex items-center justify-end space-x-4 max-w-xl mx-auto w-full py-4">
+          <NewFormButton userId={userId} />
+        </div>
       </div>
     </main>
   );

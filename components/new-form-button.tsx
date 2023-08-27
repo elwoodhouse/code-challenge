@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-export default function CreateNewFormButton(props: { userId: number }) {
+export default function NewFormButton(props: { userId: number }) {
   const { userId } = props;
   const router = useRouter();
 
